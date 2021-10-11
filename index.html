@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/tailwind.css" rel="stylesheet">
+  <title>
+    Confidence level for Disk Notifier
+  </title>
+</head>
+<body>
+  <h1 class="text-center text-5xl py-8">
+    How confident am I on different aspects of Disk Notifier?
+  </h1>
+  <div class="flex flex-row gap-5 my-5 mx-5">
+    <div id="gauge_pricing" class="gauge">
+      <div class="gauge__body">
+        <div class="gauge__fill"></div>
+        <div class="gauge__cover"></div>
+      </div>
+      <div class="text-center">Pricing</div>
+    </div>
+    <div id="gauge_code" class="gauge">
+      <div class="gauge__body">
+        <div class="gauge__fill"></div>
+        <div class="gauge__cover"></div>
+      </div>
+      <div class="text-center">Code</div>
+    </div>
+    <div id="gauge_marketing" class="gauge">
+      <div class="gauge__body">
+        <div class="gauge__fill"></div>
+        <div class="gauge__cover"></div>
+      </div>
+      <div class="text-center">Marketing</div>
+    </div>
+    <div id="gauge_content" class="gauge">
+      <div class="gauge__body">
+        <div class="gauge__fill"></div>
+        <div class="gauge__cover"></div>
+      </div>
+      <div class="text-center">Content</div>
+    </div>
+    <div id="gauge_product" class="gauge">
+      <div class="gauge__body">
+        <div class="gauge__fill"></div>
+        <div class="gauge__cover"></div>
+      </div>
+      <div class="text-center">Product</div>
+    </div>
+  </div>
+  <h2 class="text-center text-3xl">
+    Judge for yourself: <a class="underline" href="https://disknotifier.com">Disk Notifier - Dead simple disk monitoring</a>
+  </h2>
+  <script>
+
+    function setGaugeValue(gauge, value) {
+      if (value < 0 || value > 1) {
+        return;
+      }
+
+      gauge.querySelector(".gauge__fill").style.transform = `rotate(${
+        value / 2
+      }turn)`;
+      if (value <= 0.5) {
+        red = 255;
+        green = Math.round(255 * (value * 2));
+      } else {
+        green = 255;
+        red = Math.round(255 - 255 * (value));
+      }
+      console.log(red);
+      console.log(green);
+      console.log(`#${red.toString(16).padStart(2, '0')}${green.toString(16)}00`);
+      gauge.querySelector(".gauge__fill").style.backgroundColor = `#${red.toString(16).padStart(2,'0')}${green.toString(16)}00`;
+      gauge.querySelector(".gauge__cover").textContent = `${Math.round(
+        value * 100
+      )}%`;
+    }
+
+    var gaugeElement = document.querySelector("#gauge_pricing");
+    setGaugeValue(gaugeElement, 0.4);
+
+    gaugeElement = document.querySelector("#gauge_code");
+    setGaugeValue(gaugeElement, 0.8);
+
+    gaugeElement = document.querySelector("#gauge_marketing");
+    setGaugeValue(gaugeElement, 0.2);
+
+    gaugeElement = document.querySelector("#gauge_content");
+    setGaugeValue(gaugeElement, 0.6);
+
+    gaugeElement = document.querySelector("#gauge_product");
+    setGaugeValue(gaugeElement, 1);
+
+  </script>
+</body>
+</html>
